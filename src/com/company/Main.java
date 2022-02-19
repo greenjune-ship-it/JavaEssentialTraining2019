@@ -16,7 +16,7 @@ public class Main {
         incrementValue(originalArray);
         System.out.println("Original array before: " + originalArray[0]);
 
-        //
+        // strings are immutable
         String original = "Original!";
         System.out.println("Original string before: " + original);
         changeString(original);
