@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
@@ -25,8 +26,18 @@ public class Main {
             return;
         }
 
+        String operator;
         System.out.print("Select an operation (+ - * /): ");
-        var operator = sc.nextLine();
+        operator = sc.nextLine();
+
+        try {
+            if (!Set.of("+", "-", "*", "/").contains(operator)) {
+                throw new InvalidOperatorSymbol("Invalid operator: " + operator);
+            }
+        } catch (InvalidOperatorSymbol e ) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
         double result;
         switch (operator) {
@@ -43,7 +54,6 @@ public class Main {
                 result = num1 / num2;
                 break;
             default:
-                System.out.println("You didn't chose a valid operation");
                 return;
         }
         System.out.println("The answer is: " + result);
