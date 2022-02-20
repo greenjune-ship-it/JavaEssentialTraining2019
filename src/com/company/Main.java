@@ -31,6 +31,9 @@ public class Main {
         operator = sc.nextLine();
 
         try {
+            if (operator.isEmpty()) {
+                throw new InvalidOperatorSymbol("You didn't chose an operation!");
+            }
             if (!Set.of("+", "-", "*", "/").contains(operator)) {
                 throw new InvalidOperatorSymbol("Invalid operator: " + operator);
             }
