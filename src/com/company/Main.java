@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -8,16 +9,46 @@ public class Main {
 
         var sc = new Scanner(System.in);
 
-        System.out.print("Enter a numeric value: ");
-        var d1 = sc.nextDouble();
+        double num1, num2;
 
-        System.out.print("Enter a numeric value: ");
-        var d2 = sc.nextDouble();
+        try {
 
-        double result = d1 / d2;
+            System.out.print("Enter a numeric value 1: ");
+            num1 = sc.nextDouble();
+            sc.nextLine();
 
-        System.out.println("The answer is " + result);
+            System.out.print("Enter a numeric value 2: ");
+            num2 = sc.nextDouble();
+            sc.nextLine();
+        } catch (InputMismatchException e) {
+            System.out.println("Couldn't format as a number");
+            return;
+        }
+
+        System.out.print("Select an operation (+ - * /): ");
+        var operator = sc.nextLine();
+
+        double result;
+        switch (operator) {
+            case "+":
+                result = num1 + num2;
+                break;
+            case "-":
+                result = num1 - num2;
+                break;
+            case "*":
+                result = num1 * num2;
+                break;
+            case "/":
+                result = num1 / num2;
+                break;
+            default:
+                System.out.println("You didn't chose a valid operation");
+                return;
+        }
+        System.out.println("The answer is: " + result);
+
     }
-
+    
 }
 
