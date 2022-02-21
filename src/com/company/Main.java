@@ -8,60 +8,23 @@ public class Main {
 
     public static void main(String[] args) {
 
-        var sc = new Scanner(System.in);
-
-        double num1, num2;
+        CommandLineInterface cli = new CommandLineInterface();
+        Calculator calc = new Calculator();
+        double result;
 
         try {
+            var num1 = cli.requestNumber("Enter a numeric value 1: ");
+            var num2 = cli.requestNumber("Enter a numeric value 2: ");
+            var operator = cli.requestOperator("Select an operation (+ - * /): ");
 
-            System.out.print("Enter a numeric value 1: ");
-            num1 = sc.nextDouble();
-            sc.nextLine();
+            result = calc.calculateOperation(num1, num2, operator);
+            System.out.println("The answer is: " + result);
 
-            System.out.print("Enter a numeric value 2: ");
-            num2 = sc.nextDouble();
-            sc.nextLine();
         } catch (InputMismatchException e) {
             System.out.println("Couldn't format as a number");
-            return;
-        }
-
-        String operator;
-        System.out.print("Select an operation (+ - * /): ");
-        operator = sc.nextLine();
-
-        try {
-            if (operator.isEmpty()) {
-                throw new InvalidOperatorSymbol("You didn't chose an operation!");
-            }
-            if (!Set.of("+", "-", "*", "/").contains(operator)) {
-                throw new InvalidOperatorSymbol("Invalid operator: " + operator);
-            }
-        } catch (InvalidOperatorSymbol e ) {
+        } catch (InvalidOperatorSymbol e) {
             System.out.println(e.getMessage());
-            return;
         }
-
-        double result;
-        switch (operator) {
-            case "+":
-                result = num1 + num2;
-                break;
-            case "-":
-                result = num1 - num2;
-                break;
-            case "*":
-                result = num1 * num2;
-                break;
-            case "/":
-                result = num1 / num2;
-                break;
-            default:
-                return;
-        }
-        System.out.println("The answer is: " + result);
-
     }
-    
 }
 
